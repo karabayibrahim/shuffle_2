@@ -7,20 +7,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3379544261965869728, guid: a4239119365293047bc0ca93ebb68d1f,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.15955162
+      objectReference: {fileID: 0}
+    - target: {fileID: 3379544261965869728, guid: a4239119365293047bc0ca93ebb68d1f,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.4202242
+      objectReference: {fileID: 0}
     - target: {fileID: 3379544261965869729, guid: a4239119365293047bc0ca93ebb68d1f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6313416
+      value: 0.743
       objectReference: {fileID: 0}
     - target: {fileID: 3379544261965869729, guid: a4239119365293047bc0ca93ebb68d1f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.36573523
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 3379544261965869729, guid: a4239119365293047bc0ca93ebb68d1f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.179
+      value: 9.66
       objectReference: {fileID: 0}
     - target: {fileID: 3379544261965869729, guid: a4239119365293047bc0ca93ebb68d1f,
         type: 3}
@@ -65,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 3379544261965869734, guid: a4239119365293047bc0ca93ebb68d1f,
         type: 3}
       propertyPath: m_Name
-      value: NegativeGate Variant
+      value: NegativeGate Variant (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3379544261965869734, guid: a4239119365293047bc0ca93ebb68d1f,
         type: 3}
