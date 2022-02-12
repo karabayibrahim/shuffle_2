@@ -25,6 +25,8 @@ public class RoulettePanel : MonoBehaviour
 
     private void RoulettStart()
     {
+        Debug.Log("Başladı");
+        RouletGate.RouletteStart -= RoulettStart;
         RouletteWhell.SetActive(true);
     }
     
@@ -38,7 +40,7 @@ public class RoulettePanel : MonoBehaviour
         {
             GameManager.Instance.Player.LeftHand.SpawnChip((int)(BlackBet * 2));
         }
-
+        GameManager.Instance.Player.Speed = 5f;
         Destroy(gameObject);
     }
 

@@ -13,28 +13,21 @@ public class RouletGate : MonoBehaviour, ICollectable
 
     public void DoCollect(GameObject _object)
     {
-        if (_object.tag == "Left" && gameObject.tag == "BlackBet")
+        RouletteStart?.Invoke();
+        gameObject.GetComponent<Collider>().enabled = false;
+        if (_object.tag == "Right" && gameObject.tag == "RedBet")
         {
-            gameObject.GetComponent<Collider>().enabled = false;
-            BetStartStatus(_object);
-            MyPanel.BlackBet = _object.GetComponent<Hand>().MyMoneys.Count;
-
-        }
-        else
-        {
-            gameObject.GetComponent<Collider>().enabled = false;
             BetStartStatus(_object);
             MyPanel.RedBet = _object.GetComponent<Hand>().MyMoneys.Count;
-
         }
-        RouletteStart?.Invoke();
 
-        //if (_object.tag == "Right" && gameObject.tag == "RedBet")
-        //{
-        //    gameObject.GetComponent<Collider>().enabled = false;
-        //    BetStartStatus(_object);
-        //    MyPanel.RedBet = _object.GetComponent<Hand>().MyMoneys.Count;
-        //}
+        if (_object.tag == "Left" && gameObject.tag == "BlackBet")
+        {
+            BetStartStatus(_object);
+            MyPanel.BlackBet = _object.GetComponent<Hand>().MyMoneys.Count;
+        }
+
+
     }
 
     // Start is called before the first frame update
@@ -57,8 +50,8 @@ public class RouletGate : MonoBehaviour, ICollectable
     private void BetStartStatus(GameObject _object)
     {
         GameManager.Instance.Player.Speed = 0f;
-
         Bet = _object.GetComponent<Hand>().MyMoneys.Count;
+
 
         foreach (var item in _object.GetComponent<Hand>().MyMoneys)
         {
@@ -70,7 +63,6 @@ public class RouletGate : MonoBehaviour, ICollectable
                 _object.GetComponent<Hand>().MoneyTextWrite();
             });
         }
-
 
         BetTextWrite();
     }

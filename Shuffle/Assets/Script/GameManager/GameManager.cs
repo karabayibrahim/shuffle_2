@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DG.Tweening;
 public class GameManager : MonoSingleton<GameManager>
 {
     public PlayerControl Player;
@@ -9,7 +10,7 @@ public class GameManager : MonoSingleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        DOTween.Init();
     }
 
     // Update is called once per frame

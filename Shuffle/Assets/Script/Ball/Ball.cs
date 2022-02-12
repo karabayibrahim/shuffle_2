@@ -26,7 +26,7 @@ public class Ball : MonoBehaviour
         float tour;
         if (rnd==0)
         {
-            tour = 2.95f;
+            tour = 2.94f;
             _result = 0;
         }
         else

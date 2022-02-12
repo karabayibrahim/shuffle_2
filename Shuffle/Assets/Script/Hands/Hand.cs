@@ -72,9 +72,8 @@ public class Hand : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Return) && gameObject.tag == "Left")
         {
-            if (MyMoneys.Count > 0 && !_canMove && Time.time > fireRate + lastShot)
+            if (MyMoneys.Count > 0 && Time.time > fireRate + lastShot)
             {
-                //_canMove = true;
                 OtherHand.GetComponent<Hand>().seq.Kill(true);
                 ResetScale();
                 lastShot = Time.time;
@@ -88,7 +87,7 @@ public class Hand : MonoBehaviour
                 seq.Join(moveObject.transform.DOLocalJump(myPoz, -20f, 1, 0.25f)).SetEase(Ease.OutCubic)
                    .Join(moveObject.transform.DOLocalRotate(new Vector3(90, -180, -180), 0.25f)).OnComplete(() =>
                    {
-                       moveObject.transform.DOScale(new Vector3(moveObject.transform.localScale.x * 1.2f, moveObject.transform.localScale.y * 1.2f, moveObject.transform.localScale.z), 0.1f).From().OnComplete(() => _canMove = false);
+                       moveObject.transform.DOScale(new Vector3(moveObject.transform.localScale.x * 1.2f, moveObject.transform.localScale.y * 1.2f, moveObject.transform.localScale.z), 0.1f).From();
                    });
                 OtherHand.GetComponent<Hand>().MoneyTextWrite();
                 MoneyTextWrite();
