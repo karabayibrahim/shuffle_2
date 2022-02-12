@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public float Speed;
+    public Hand LeftHand;
+    public Hand RightHand;
     void Start()
     {
         

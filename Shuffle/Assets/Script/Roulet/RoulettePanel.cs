@@ -5,11 +5,18 @@ using UnityEngine;
 public class RoulettePanel : MonoBehaviour
 {
     public GameObject RouletteWhell;
+    public float RedBet { get; set; }
+    public float BlackBet { get; set; }
     void Start()
     {
         RouletGate.RouletteStart += RoulettStart;
+        Ball.ResultEvent += RoulettFinish;
     }
-
+    private void OnDisable()
+    {
+        RouletGate.RouletteStart -= RoulettStart;
+        Ball.ResultEvent -= RoulettFinish;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -18,13 +25,20 @@ public class RoulettePanel : MonoBehaviour
 
     private void RoulettStart()
     {
-        GameManager.Instance.LevelCam.Follow = transform;
-        GameManager.Instance.LevelCam.LookAt = transform;
         RouletteWhell.SetActive(true);
     }
     
-    private void RoulettFinish()
+    private void RoulettFinish(int _result)
     {
+        if (_result==0)
+        {
+            GameManager.Instance.Player.RightHand.SpawnChip((int)(RedBet * 2));
+        }
+        else
+        {
+            GameManager.Instance.Player.LeftHand.SpawnChip((int)(BlackBet * 2));
+        }
+
         Destroy(gameObject);
     }
 
