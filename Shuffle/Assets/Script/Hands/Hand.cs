@@ -15,8 +15,7 @@ public class Hand : MonoBehaviour
     public List<GameObject> Chips = new List<GameObject>();
     public Animator Anim;
     public Sequence seq;
-    private bool _canMove = false;
-    private float fireRate = 0.05f;
+    private float fireRate = 0.01f;
     private float lastShot = 0;
     void Start()
     {
@@ -33,6 +32,8 @@ public class Hand : MonoBehaviour
     void Update()
     {
         SwipeMove();
+        HorizontalMovement();
+        //Debug.Log(Input.mousePosition.normalized.x);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -47,50 +48,36 @@ public class Hand : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space)&&gameObject.tag=="Right")
         {
-            if (MyMoneys.Count > 0 && !_canMove && Time.time > fireRate + lastShot)
-            {
-                //_canMove = true;
-                OtherHand.GetComponent<Hand>().seq.Kill(true);
-                ResetScale();
-                lastShot = Time.time;
-                Anim.CrossFade("Event", 0.05f);
-                var moveObject = MyMoneys[MyMoneys.Count - 1];
-                seq = DOTween.Sequence();
-                OtherHand.GetComponent<Hand>().MyMoneys.Add(moveObject);
-                MyMoneys.Remove(moveObject);
-                Vector3 myPoz = new Vector3(-0.5f, ((OtherHand.GetComponent<Hand>().MyMoneys.Count - 1) + Carpan) * Height, 5f);
-                moveObject.transform.SetParent(OtherHand.transform);
-                seq.Join(moveObject.transform.DOLocalJump(myPoz, -20f, 1, 0.25f)).SetEase(Ease.OutCubic)
-                   .Join(moveObject.transform.DOLocalRotate(new Vector3(90, -180, -180), 0.25f)).OnComplete(() =>
-                   {
-                       moveObject.transform.DOScale(new Vector3(moveObject.transform.localScale.x * 1.2f, moveObject.transform.localScale.y * 1.2f, moveObject.transform.localScale.z), 0.1f).From().OnComplete(() => _canMove = false);
-                   });
-                OtherHand.GetComponent<Hand>().MoneyTextWrite();
-                MoneyTextWrite();
-            }
 
+            RightMove();
         }
         if (Input.GetKey(KeyCode.Return) && gameObject.tag == "Left")
         {
-            if (MyMoneys.Count > 0 && Time.time > fireRate + lastShot)
+            LeftMove();
+        }
+    }
+
+    private void HorizontalMovement()
+    {
+        if (Input.touchCount > 0)
+        {
+            Vector2 touchPosMove;
+            Touch _theTouch = Input.GetTouch(0);
+
+
+            if (_theTouch.phase == TouchPhase.Stationary)
             {
-                OtherHand.GetComponent<Hand>().seq.Kill(true);
-                ResetScale();
-                lastShot = Time.time;
-                Anim.CrossFade("Event", 0.05f);
-                var moveObject = MyMoneys[MyMoneys.Count - 1];
-                seq = DOTween.Sequence();
-                OtherHand.GetComponent<Hand>().MyMoneys.Add(moveObject);
-                MyMoneys.Remove(moveObject);
-                Vector3 myPoz = new Vector3(-0.5f, ((OtherHand.GetComponent<Hand>().MyMoneys.Count - 1) + Carpan) * Height, 5f);
-                moveObject.transform.SetParent(OtherHand.transform);
-                seq.Join(moveObject.transform.DOLocalJump(myPoz, -20f, 1, 0.25f)).SetEase(Ease.OutCubic)
-                   .Join(moveObject.transform.DOLocalRotate(new Vector3(90, -180, -180), 0.25f)).OnComplete(() =>
-                   {
-                       moveObject.transform.DOScale(new Vector3(moveObject.transform.localScale.x * 1.2f, moveObject.transform.localScale.y * 1.2f, moveObject.transform.localScale.z), 0.1f).From();
-                   });
-                OtherHand.GetComponent<Hand>().MoneyTextWrite();
-                MoneyTextWrite();
+                 touchPosMove= _theTouch.position;
+                if (touchPosMove.x>Screen.width/2f&&gameObject.tag=="Left")
+                {
+                    LeftMove();
+                }
+                else if(touchPosMove.x < Screen.width / 2f && gameObject.tag == "Right")
+                {
+                    RightMove();
+                }
+                
+
             }
         }
     }
@@ -151,6 +138,53 @@ public class Hand : MonoBehaviour
         }
     }
 
+    private void RightMove()
+    {
+        if (MyMoneys.Count > 0 && Time.time > fireRate + lastShot)
+        {
+            OtherHand.GetComponent<Hand>().seq.Kill(true);
+            ResetScale();
+            lastShot = Time.time;
+            Anim.CrossFade("Event", 0.05f);
+            var moveObject = MyMoneys[MyMoneys.Count - 1];
+            seq = DOTween.Sequence();
+            OtherHand.GetComponent<Hand>().MyMoneys.Add(moveObject);
+            MyMoneys.Remove(moveObject);
+            Vector3 myPoz = new Vector3(-0.5f, ((OtherHand.GetComponent<Hand>().MyMoneys.Count - 1) + Carpan) * Height, 5f);
+            moveObject.transform.SetParent(OtherHand.transform);
+            seq.Join(moveObject.transform.DOLocalJump(myPoz, -20f, 1, 0.25f)).SetEase(Ease.OutCubic)
+               .Join(moveObject.transform.DOLocalRotate(new Vector3(90, -180, -180), 0.25f)).OnComplete(() =>
+               {
+                   moveObject.transform.DOScale(new Vector3(moveObject.transform.localScale.x * 1.2f, moveObject.transform.localScale.y * 1.2f, moveObject.transform.localScale.z), 0.1f).From();
+               });
+            OtherHand.GetComponent<Hand>().MoneyTextWrite();
+            MoneyTextWrite();
+        }
+    }
+
+    private void LeftMove()
+    {
+        if (MyMoneys.Count > 0 && Time.time > fireRate + lastShot)
+        {
+            OtherHand.GetComponent<Hand>().seq.Kill(true);
+            ResetScale();
+            lastShot = Time.time;
+            Anim.CrossFade("Event", 0.05f);
+            var moveObject = MyMoneys[MyMoneys.Count - 1];
+            seq = DOTween.Sequence();
+            OtherHand.GetComponent<Hand>().MyMoneys.Add(moveObject);
+            MyMoneys.Remove(moveObject);
+            Vector3 myPoz = new Vector3(-0.5f, ((OtherHand.GetComponent<Hand>().MyMoneys.Count - 1) + Carpan) * Height, 5f);
+            moveObject.transform.SetParent(OtherHand.transform);
+            seq.Join(moveObject.transform.DOLocalJump(myPoz, -20f, 1, 0.25f)).SetEase(Ease.OutCubic)
+               .Join(moveObject.transform.DOLocalRotate(new Vector3(90, -180, -180), 0.25f)).OnComplete(() =>
+               {
+                   moveObject.transform.DOScale(new Vector3(moveObject.transform.localScale.x * 1.2f, moveObject.transform.localScale.y * 1.2f, moveObject.transform.localScale.z), 0.1f).From();
+               });
+            OtherHand.GetComponent<Hand>().MoneyTextWrite();
+            MoneyTextWrite();
+        }
+    }
     public void MoneyTextWrite()
     {
         MyMoneyText.text = "$" + (MyMoneys.Count * 10f).ToString();
