@@ -9,12 +9,23 @@ public class PlayerControl : MonoBehaviour
     public Hand RightHand;
     void Start()
     {
+        Finish.FinishEvent += FinishStatus;
         Speed = 5f;
+    }
+
+    private void OnDisable()
+    {
+        Finish.FinishEvent -= FinishStatus;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(0, 0, Speed*Time.deltaTime);
+    }
+
+    private void FinishStatus()
+    {
+        Speed = 0;
     }
 }

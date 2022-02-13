@@ -5,6 +5,8 @@ using UnityEngine;
 public class RoulettePanel : MonoBehaviour
 {
     public GameObject RouletteWhell;
+    public int MyId = 0;
+    public int OtherId;
     public float RedBet { get; set; }
     public float BlackBet { get; set; }
     void Start()
@@ -20,28 +22,38 @@ public class RoulettePanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void RoulettStart()
     {
-        Debug.Log("Başladı");
-        RouletGate.RouletteStart -= RoulettStart;
-        RouletteWhell.SetActive(true);
+        if (MyId == OtherId)
+        {
+            Debug.Log("Başladı");
+            RouletGate.RouletteStart -= RoulettStart;
+            RouletteWhell.SetActive(true);
+        }
+
     }
-    
+
     private void RoulettFinish(int _result)
     {
-        if (_result==0)
+        if (MyId == OtherId)
         {
-            GameManager.Instance.Player.RightHand.SpawnChip((int)(RedBet * 2));
+            if (_result == 0)
+            {
+                GameManager.Instance.Player.RightHand.SpawnChip((int)(RedBet * 2));
+            }
+            else
+            {
+                GameManager.Instance.Player.LeftHand.SpawnChip((int)(BlackBet * 2));
+            }
+            GameManager.Instance.Player.Speed = 5f;
+            Destroy(gameObject);
+            GameManager.Instance.Player.LeftHand.MyId++;
+            GameManager.Instance.Player.RightHand.MyId++;
         }
-        else
-        {
-            GameManager.Instance.Player.LeftHand.SpawnChip((int)(BlackBet * 2));
-        }
-        GameManager.Instance.Player.Speed = 5f;
-        Destroy(gameObject);
+
     }
 
 }

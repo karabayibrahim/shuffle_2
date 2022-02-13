@@ -9,7 +9,7 @@ public class Hand : MonoBehaviour
     public List<Money> MyMoneys = new List<Money>();
     public int SpawnCount;
     public TextMeshPro MyMoneyText;
-
+    public IList<Money> AbsLis;
     private int Carpan = 5;
     public float Height;
     public List<GameObject> Chips = new List<GameObject>();
@@ -17,8 +17,10 @@ public class Hand : MonoBehaviour
     public Sequence seq;
     private float fireRate = 0.01f;
     private float lastShot = 0;
+    public int MyId = 1;
     void Start()
     {
+        Finish.FinishEvent += FinishStatus;
         Anim = GetComponent<Animator>();
         SpawnSystem();
         foreach (var item in gameObject.GetComponentsInChildren<Money>())
@@ -28,6 +30,10 @@ public class Hand : MonoBehaviour
         MoneyTextWrite();
     }
 
+    private void OnDisable()
+    {
+        Finish.FinishEvent += FinishStatus;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -188,5 +194,36 @@ public class Hand : MonoBehaviour
     public void MoneyTextWrite()
     {
         MyMoneyText.text = "$" + (MyMoneys.Count * 10f).ToString();
+    }
+
+    private void FinishStatus()
+    {
+        MyMoneys.Reverse();
+        Anim.enabled = false;
+        foreach (var item in MyMoneys)
+        {
+            item.gameObject.transform.SetParent(null); 
+        }
+        StartCoroutine(ChipFinishTime());
+    }
+
+    private IEnumerator ChipFinishTime()
+    {
+        if (MyMoneys!=null)
+        {
+            foreach (var item in MyMoneys.ToArray())
+            {
+                item.gameObject.transform.DOMove(GameManager.Instance.ATM.ChipGatepos.position, 0.5f).OnComplete(() =>
+                {
+                    GameManager.Instance.ATM.ChipCount++;
+                    MyMoneys.Remove(item);
+                    MoneyTextWrite();
+                });
+                yield return new WaitForSeconds(0.1f);
+
+            }
+        }
+        
+        yield break;
     }
 }

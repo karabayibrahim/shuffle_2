@@ -13,6 +13,7 @@ public class RouletGate : MonoBehaviour, ICollectable
 
     public void DoCollect(GameObject _object)
     {
+        gameObject.GetComponentInParent<RoulettePanel>().OtherId = _object.GetComponent<Hand>().MyId;
         RouletteStart?.Invoke();
         gameObject.GetComponent<Collider>().enabled = false;
         if (_object.tag == "Right" && gameObject.tag == "RedBet")
@@ -26,6 +27,12 @@ public class RouletGate : MonoBehaviour, ICollectable
             BetStartStatus(_object);
             MyPanel.BlackBet = _object.GetComponent<Hand>().MyMoneys.Count;
         }
+        if (gameObject.GetComponentInParent<RoulettePanel>().MyId==_object.GetComponent<Hand>().MyId)
+        {
+            //gameObject.GetComponentInParent<RoulettePanel>().OtherId = _object.GetComponent<Hand>().MyId;
+            
+        }
+        
 
 
     }
