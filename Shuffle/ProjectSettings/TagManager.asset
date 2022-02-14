@@ -10,6 +10,8 @@ TagManager:
   - Negative
   - BlackBet
   - RedBet
+  - PositiveMultiple
+  - NegativeDivide
   layers:
   - Default
   - TransparentFX

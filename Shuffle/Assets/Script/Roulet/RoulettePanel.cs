@@ -52,6 +52,7 @@ public class RoulettePanel : MonoBehaviour
             Destroy(gameObject);
             GameManager.Instance.Player.LeftHand.MyId++;
             GameManager.Instance.Player.RightHand.MyId++;
+            GameManager.Instance.Player.MoneyControl();
         }
 
     }

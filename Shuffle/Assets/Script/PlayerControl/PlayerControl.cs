@@ -28,4 +28,12 @@ public class PlayerControl : MonoBehaviour
     {
         Speed = 0;
     }
+
+    public void MoneyControl()
+    {
+        if (LeftHand.MyMoneys.Count <= 0 && RightHand.MyMoneys.Count <= 0)
+        {
+            UIManager.RestartEvent?.Invoke();
+        }
+    }
 }

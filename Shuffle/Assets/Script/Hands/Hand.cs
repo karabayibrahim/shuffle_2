@@ -17,6 +17,7 @@ public class Hand : MonoBehaviour
     public Sequence seq;
     private float fireRate = 0.01f;
     private float lastShot = 0;
+    private bool _finishControl = false;
     public int MyId = 1;
     void Start()
     {
@@ -198,13 +199,21 @@ public class Hand : MonoBehaviour
 
     private void FinishStatus()
     {
-        MyMoneys.Reverse();
-        Anim.enabled = false;
-        foreach (var item in MyMoneys)
+        if (!_finishControl)
         {
-            item.gameObject.transform.SetParent(null); 
+            MyMoneys.Reverse();
+            if (Anim != null)
+            {
+                Anim.enabled = false;
+            }
+            foreach (var item in MyMoneys)
+            {
+                item.gameObject.transform.SetParent(null);
+            }
+            StartCoroutine(ChipFinishTime());
+            _finishControl = true;
         }
-        StartCoroutine(ChipFinishTime());
+        
     }
 
     private IEnumerator ChipFinishTime()
@@ -219,7 +228,7 @@ public class Hand : MonoBehaviour
                     MyMoneys.Remove(item);
                     MoneyTextWrite();
                 });
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.01f);
 
             }
         }
