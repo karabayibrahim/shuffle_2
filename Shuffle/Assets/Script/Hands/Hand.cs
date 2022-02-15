@@ -10,6 +10,7 @@ public class Hand : MonoBehaviour
     public int SpawnCount;
     public TextMeshPro MyMoneyText;
     public IList<Money> AbsLis;
+    public bool FinishPanelControl = false;
     private int Carpan = 5;
     public float Height;
     public List<GameObject> Chips = new List<GameObject>();
@@ -40,6 +41,10 @@ public class Hand : MonoBehaviour
     {
         SwipeMove();
         HorizontalMovement();
+        if (_finishControl&&MyMoneys.Count<=0)
+        {
+            FinishPanelControl = true;
+        }
         //Debug.Log(Input.mousePosition.normalized.x);
     }
 

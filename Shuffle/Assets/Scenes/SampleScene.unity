@@ -1132,7 +1132,7 @@ PrefabInstance:
     - target: {fileID: 3379544261965869729, guid: a4239119365293047bc0ca93ebb68d1f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.8698502
+      value: 7.55
       objectReference: {fileID: 0}
     - target: {fileID: 3379544261965869729, guid: a4239119365293047bc0ca93ebb68d1f,
         type: 3}
@@ -1709,7 +1709,7 @@ PrefabInstance:
     - target: {fileID: 2016300582194814047, guid: 10b55c4926f7cff429073679d78b3e44,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.11
+      value: -7.39
       objectReference: {fileID: 0}
     - target: {fileID: 2016300582194814047, guid: 10b55c4926f7cff429073679d78b3e44,
         type: 3}
@@ -2036,7 +2036,7 @@ PrefabInstance:
     - target: {fileID: 3379544261965869729, guid: a4239119365293047bc0ca93ebb68d1f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.19
+      value: -26.8
       objectReference: {fileID: 0}
     - target: {fileID: 3379544261965869729, guid: a4239119365293047bc0ca93ebb68d1f,
         type: 3}
@@ -3165,7 +3165,7 @@ PrefabInstance:
     - target: {fileID: 8872399304017043746, guid: e15b6261b803ba94a8be966bbc78fb28,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 24.43015
+      value: 36.07
       objectReference: {fileID: 0}
     - target: {fileID: 8872399304017043746, guid: e15b6261b803ba94a8be966bbc78fb28,
         type: 3}
@@ -3564,6 +3564,7 @@ MonoBehaviour:
   MyMoneys: []
   SpawnCount: 25
   MyMoneyText: {fileID: 311752752}
+  FinishPanelControl: 0
   Height: -0.5
   Chips:
   - {fileID: 481461139524261186, guid: 5e236ba8ba79ccb488a67476123634da, type: 3}
@@ -3722,7 +3723,7 @@ PrefabInstance:
     - target: {fileID: 2016300582194814047, guid: 10b55c4926f7cff429073679d78b3e44,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.1301498
+      value: 17.43
       objectReference: {fileID: 0}
     - target: {fileID: 2016300582194814047, guid: 10b55c4926f7cff429073679d78b3e44,
         type: 3}
@@ -4220,7 +4221,7 @@ PrefabInstance:
     - target: {fileID: 2016300582194814047, guid: 10b55c4926f7cff429073679d78b3e44,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.2
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2016300582194814047, guid: 10b55c4926f7cff429073679d78b3e44,
         type: 3}
@@ -5117,6 +5118,7 @@ MonoBehaviour:
   MyMoneys: []
   SpawnCount: 25
   MyMoneyText: {fileID: 1472537918}
+  FinishPanelControl: 0
   Height: -0.5
   Chips:
   - {fileID: 1062116203631969068, guid: b40178dd06ea902438618e7db973fe6e, type: 3}

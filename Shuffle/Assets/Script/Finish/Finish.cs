@@ -10,7 +10,7 @@ public class Finish : MonoBehaviour,ICollectable
     public void DoCollect(GameObject _object)
     {
         FinishEvent?.Invoke();
-        StartCoroutine(WinPanelTimer());
+        
     }
 
     // Start is called before the first frame update
@@ -22,12 +22,15 @@ public class Finish : MonoBehaviour,ICollectable
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameManager.Instance.Player.LeftHand.FinishPanelControl&& GameManager.Instance.Player.RightHand.FinishPanelControl)
+        {
+            StartCoroutine(WinPanelTimer());
+        }
     }
 
     private IEnumerator WinPanelTimer()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         UIManager.WinEvent?.Invoke();
         yield break;
     }
