@@ -3562,7 +3562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OtherHand: {fileID: 1845183253}
   MyMoneys: []
-  SpawnCount: 25
+  SpawnCount: 20
   MyMoneyText: {fileID: 311752752}
   FinishPanelControl: 0
   Height: -0.5
@@ -5116,7 +5116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OtherHand: {fileID: 1166779799}
   MyMoneys: []
-  SpawnCount: 25
+  SpawnCount: 20
   MyMoneyText: {fileID: 1472537918}
   FinishPanelControl: 0
   Height: -0.5
