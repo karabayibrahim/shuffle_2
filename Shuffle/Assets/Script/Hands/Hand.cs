@@ -19,6 +19,8 @@ public class Hand : MonoBehaviour
     private float fireRate = 0.01f;
     private float lastShot = 0;
     private bool _finishControl = false;
+    Vector2 touchPosMove;
+    Vector2 touchPosBegan;
     public int MyId = 1;
     void Start()
     {
@@ -71,24 +73,49 @@ public class Hand : MonoBehaviour
 
     private void HorizontalMovement()
     {
+       
         if (Input.touchCount > 0)
         {
-            Vector2 touchPosMove;
             Touch _theTouch = Input.GetTouch(0);
-
-
-            if (_theTouch.phase == TouchPhase.Stationary)
+            if (_theTouch.phase == TouchPhase.Began)
             {
-                 touchPosMove= _theTouch.position;
-                if (touchPosMove.x>Screen.width/2f&&gameObject.tag=="Left")
+                touchPosBegan = _theTouch.position;
+                Debug.Log(touchPosBegan.x);
+            }
+            else if (_theTouch.phase == TouchPhase.Stationary)
+            {
+                touchPosMove = _theTouch.position;
+                if (touchPosMove.x > touchPosBegan.x && gameObject.tag == "Left")
                 {
                     LeftMove();
                 }
-                else if(touchPosMove.x < Screen.width / 2f && gameObject.tag == "Right")
+                else if (touchPosMove.x < touchPosBegan.x && gameObject.tag == "Right")
                 {
                     RightMove();
                 }
-                
+            }
+
+            else if (_theTouch.phase == TouchPhase.Moved)
+            {
+                 touchPosMove= _theTouch.position;
+                Debug.Log(touchPosMove.x);
+                if (touchPosMove.x>touchPosBegan.x && gameObject.tag == "Left")
+                {
+                    LeftMove();
+                }
+                else if (touchPosMove.x<touchPosBegan.x && gameObject.tag == "Right")
+                {
+                    RightMove();
+                }
+                //if (touchPosMove.x>Screen.width/2f&&gameObject.tag=="Left")
+                //{
+                //    LeftMove();
+                //}
+                //else if(touchPosMove.x < Screen.width / 2f && gameObject.tag == "Right")
+                //{
+                //    RightMove();
+                //}
+
 
             }
         }
@@ -146,7 +173,7 @@ public class Hand : MonoBehaviour
     {
         foreach (var item in MyMoneys)
         {
-            item.transform.DOScale(new Vector3(400, 400, 50), 0.01f);
+            item.transform.localScale = new Vector3(400, 400, 50);
         }
     }
 
