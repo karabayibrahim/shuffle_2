@@ -13,6 +13,7 @@ public class GameManager : MonoSingleton<GameManager>
     void Start()
     {
         DOTween.Init();
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame

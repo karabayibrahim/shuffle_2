@@ -192,7 +192,7 @@ public class Hand : MonoBehaviour
             Vector3 myPoz = new Vector3(-0.5f, ((OtherHand.GetComponent<Hand>().MyMoneys.Count - 1) + Carpan) * Height, 5f);
             moveObject.transform.SetParent(OtherHand.transform);
             seq.Join(moveObject.transform.DOLocalJump(myPoz, -20f, 1, 0.25f)).SetEase(Ease.OutCubic)
-               .Join(moveObject.transform.DOLocalRotate(new Vector3(90, -180, -180), 0.25f)).OnComplete(() =>
+               .Join(moveObject.transform.DOLocalRotate(new Vector3(90, -180, -180), 0.1f)).OnComplete(() =>
                {
                    moveObject.transform.DOScale(new Vector3(moveObject.transform.localScale.x * 1.2f, moveObject.transform.localScale.y * 1.2f, moveObject.transform.localScale.z), 0.1f).From();
                });
@@ -216,7 +216,7 @@ public class Hand : MonoBehaviour
             Vector3 myPoz = new Vector3(-0.5f, ((OtherHand.GetComponent<Hand>().MyMoneys.Count - 1) + Carpan) * Height, 5f);
             moveObject.transform.SetParent(OtherHand.transform);
             seq.Join(moveObject.transform.DOLocalJump(myPoz, -20f, 1, 0.25f)).SetEase(Ease.OutCubic)
-               .Join(moveObject.transform.DOLocalRotate(new Vector3(90, -180, -180), 0.25f)).OnComplete(() =>
+               .Join(moveObject.transform.DOLocalRotate(new Vector3(90, -180, -180), 0.1f)).OnComplete(() =>
                {
                    moveObject.transform.DOScale(new Vector3(moveObject.transform.localScale.x * 1.2f, moveObject.transform.localScale.y * 1.2f, moveObject.transform.localScale.z), 0.1f).From();
                });
